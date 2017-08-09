@@ -1,0 +1,30 @@
+
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div>
+
+    <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <td>Sr. No</td>
+                        <th>Title</th>
+                        <th>Thumbnail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let photo of photos;  let i = index'>
+                        <td>{{i + 1}}</td>
+                        <td>{{photo.title}}</td>
+                        <td><img [src]='photo.thumbnailUrl'></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

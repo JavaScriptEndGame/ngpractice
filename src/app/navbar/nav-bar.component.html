@@ -1,0 +1,10 @@
+<nav class='navbar navbar-default' *ngIf='showNavBar'>
+    <div class='container-fluid'>
+        <a class='navbar-brand'></a>
+        <ul class='nav navbar-nav'>
+            <li><a [routerLink]="['/photos']">Photos</a></li>
+            <li><a [routerLink]="['/products']">Product List</a></li>
+            <!-- <li><a (click)="logout()" style="cursor:pointer;">Logout</a></li> -->
+        </ul>
+    </div>
+</nav>

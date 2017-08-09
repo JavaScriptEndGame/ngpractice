@@ -1,0 +1,72 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div>
+
+    <!-- Filter the Products   -->
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-2'>Filter by:</div>
+            <div class='col-md-4'>
+                <input type='text' [(ngModel)]='listFilter' />
+            </div>            
+        </div>
+        <div class='row' [hidden]='!listFilter'>
+            <div class='col-md-6'>
+                <h3>Filtered by: {{listFilter}} </h3>
+            </div>
+        </div>
+
+        <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+        
+        <div class='table-responsive'>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>
+                            <button class='btn btn-primary' (click)='toggleImage()'>
+                                {{showImage ? 'Hide' : 'Show'}} Image
+                            </button>
+                        </th>
+                        <th>Product</th>
+                        <th>Code</th>
+                        <th>Available</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                        <th>Star Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let product of products'>
+                        <td><img *ngIf='showImage' [src]='product.imageUrl' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'
+                            /></td>
+                        <td>{{product.productName}}
+                        </td>                        
+                        <td>{{ product.productCode | lowercase }}</td>
+                        <td>{{ product.releaseDate }}</td>                        
+                        <td>{{ product.price | currency:'USD':true:'1.2-2' }}</td>
+                        <td>
+                            <div [ngSwitch]="product.starRating">
+                                {{product.starRating}}
+                                <span *ngSwitchCase="1">(Bad)</span>
+                                <span *ngSwitchCase="2">(Average)</span>
+                                <span *ngSwitchCase="3">(Average)</span>
+                                <span *ngSwitchCase="4">(Good)</span>
+                                <span *ngSwitchCase="5">(Excellent)</span>
+                                <span *ngSwitchDefault>(Rating not available)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <cygnet-star [rating]='product.starRating'
+                                    (ratingClicked)='onRatingClicked($event)'>
+                            </cygnet-star>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div>
+    <app-add-product></app-add-product>
+</div>
